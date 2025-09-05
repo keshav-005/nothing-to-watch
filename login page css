@@ -1,0 +1,304 @@
+/* CSS */
+        /* ===== GLOBAL RESET ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ===== BODY & BACKGROUND STYLING ===== */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* Main gradient background - Change colors here for different themes */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        /* Background overlay effects - Creates floating light bubbles */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                /* Light bubbles positioned around the screen */
+                radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(102, 126, 234, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* ===== MAIN CONTAINER STYLING ===== */
+        .login-container {
+            /* Container appearance */
+            background: rgba(255, 255, 255, 0.95); /* Semi-transparent white background */
+            backdrop-filter: blur(20px); /* Glass effect */
+            border-radius: 30px; /* Rounded corners */
+            padding: 50px; /* Internal spacing */
+            
+            /* Shadow and border effects */
+            box-shadow: 0 30px 60px rgba(102, 126, 234, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            
+            /* Size and positioning */
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            
+            /* Entry animation */
+            animation: fadeInUp 1s ease-out;
+            position: relative;
+        }
+
+        /* Animated border glow effect */
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            /* Animated gradient border - Change colors for different effects */
+            background: linear-gradient(45deg, rgba(102, 126, 234, 0.4), rgba(246, 147, 251, 0.4));
+            border-radius: 30px;
+            z-index: -1;
+            animation: borderGlow 3s ease-in-out infinite alternate;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        
+        /* Container entrance animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Border glow animation */
+        @keyframes borderGlow {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        /* Icon floating animation */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) scale(1) rotate(0deg);
+            }
+            33% {
+                transform: translateY(-15px) scale(1.1) rotate(2deg);
+            }
+            66% {
+                transform: translateY(-5px) scale(1.05) rotate(-1deg);
+            }
+        }
+
+        /* ===== TITLE STYLING ===== */
+        
+        /* Main birthday icon */
+        .security-icon {
+            font-size: 4.5em;
+            margin-bottom: 20px;
+            animation: float 4s ease-in-out infinite;
+            /* Icon color - Change this to match your theme */
+            filter: hue-rotate(0deg) brightness(1.2);
+        }
+
+        /* Title text styling */
+        .login-title {
+            font-weight: 400;
+            color: #333;
+            margin-bottom: 15px;
+            /* Gradient text color - Customize these colors */
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 4px rgba(102, 126, 234, 0.2);
+            line-height: 1.3;
+        }
+
+        /* Different sizes for different title elements */
+        .login-title.main {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .login-title.sub {
+            font-size: 1.4em;
+            margin-bottom: 8px;
+        }
+
+        .login-title.name {
+            font-size: 2em;
+            margin-bottom: 25px;
+        }
+
+        /* ===== FORM STYLING ===== */
+        
+        /* Password input container */
+        .password-container {
+            position: relative;
+            margin-bottom: 35px;
+        }
+
+        /* Password input field */
+        .password-input {
+            width: 100%;
+            padding: 18px 55px 18px 25px; /* Extra padding for eye button */
+            font-size: 16px;
+            border: 2px solid #e1e5e9;
+            border-radius: 15px;
+            background: #f8f9fa;
+            color: #333;
+            outline: none;
+            transition: all 0.4s ease;
+            font-weight: 500;
+        }
+
+        /* Input focus effects */
+        .password-input:focus {
+            /* Focus colors - Change these to match your theme */
+            border-color: #667eea;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
+            transform: scale(1.02);
+        }
+
+        /* Eye button for password visibility toggle */
+        .eye-button {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #6c757d;
+            font-size: 20px;
+            padding: 8px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        /* Eye button hover effects */
+        .eye-button:hover {
+            /* Hover colors - Customize these */
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateY(-50%) scale(1.2);
+        }
+
+        /* ===== SUBMIT BUTTON STYLING ===== */
+        .unlock-button {
+            width: 100%;
+            padding: 20px;
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+            /* Button gradient - Change colors here */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 18px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            /* Button shadow - Adjust color to match gradient */
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Button shine effect */
+        .unlock-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        /* Button hover effects */
+        .unlock-button:hover {
+            transform: translateY(-4px);
+            /* Hover shadow - Adjust color */
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.5);
+        }
+
+        /* Shine effect on hover */
+        .unlock-button:hover:before {
+            left: 100%;
+        }
+
+        /* Button click effect */
+        .unlock-button:active {
+            transform: translateY(-1px);
+        }
+
+        /* ===== ERROR MESSAGE STYLING ===== */
+        .error-message {
+            color: #e74c3c; /* Error color - red */
+            font-size: 14px;
+            margin-top: 15px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            font-weight: 500;
+            line-height: 1.4;
+            padding: 10px;
+            background: rgba(231, 76, 60, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(231, 76, 60, 0.2);
+        }
+
+        /* Show error message */
+        .error-message.show {
+            opacity: 1;
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 35px 25px;
+                margin: 10px;
+            }
+            
+            .login-title.main {
+                font-size: 1.8em;
+            }
+            
+            .login-title.sub {
+                font-size: 1.2em;
+            }
+            
+            .login-title.name {
+                font-size: 1.6em;
+            }
+            
+            .security-icon {
+                font-size: 3.5em;
+            }
+            
+            .unlock-button {
+                font-size: 16px;
+                padding: 18px;
+            }
+        }
+
+/* Currently only this much css for login page */
