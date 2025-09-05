@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Surprise</title>
+    <link rel="stylesheet" href="login-css.css">
+</head>
+<body>
+    <div class="login-container">
+        <!-- Birthday icons - Using widely supported emojis onnly for better compatibility -->
+        <div class="security-icon">🥳🎂🎉</div>
+        
+        <!-- Title sections - Using more compatible emojis -->
+        <h1 class="login-title main">It's Finally Your Birthday 🎂</h1>
+        <h2 class="login-title sub">I waited for it for so long 💕</h2>
+        <h1 class="login-title name">Happy Birthday M! 🎈</h1>
+        
+        <!-- Login form -->
+        <form id="loginForm">
+            <div class="password-container">
+                <!-- Password input - Change placeholder text here -->
+                <input 
+                    type="password" 
+                    id="passwordInput" 
+                    class="password-input" 
+                    placeholder="Enter the special word..."
+                    autocomplete="current-password"
+                    required
+                >
+                <!-- Eye button for showing/hiding password -->
+                <button type="button" class="eye-button" id="togglePassword">
+                    👁️
+                </button>
+            </div>
+            
+            <!-- Submit button - Change button text here -->
+            <button type="submit" class="unlock-button">
+                Let's Go! (i really hope you like it)
+            </button>
+        </form>
+        
+        <!-- Error message - Customize error text here -->
+        <div class="error-message" id="errorMessage">
+            Oops, who're you? Don't dare to open it!<br>
+            (If it's you, just try again - there might be a little typo)
+        </div>
+    </div>
+
+    <script>
+        // ===== JAVASCRIPT FUNCTIONALITY =====
+        
+        // Get references to DOM elements
+        const passwordInput = document.getElementById('passwordInput');
+        const toggleButton = document.getElementById('togglePassword');
+        const loginForm = document.getElementById('loginForm');
+        const errorMessage = document.getElementById('errorMessage');
+
+        // ===== PASSWORD VISIBILITY TOGGLE =====
+        toggleButton.addEventListener('click', function() {
+            // Toggle between 'password' and 'text' input types
+            const currentType = passwordInput.getAttribute('type');
+            const newType = currentType === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', newType);
+            
+            // Change eye icon based on visibility state
+            this.textContent = newType === 'password' ? '👁️' : '🙈';
+        });
+
+        // ===== FORM SUBMISSION HANDLER =====
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent default form submission
+            
+            // Get the entered password
+            const enteredPassword = passwordInput.value;
+            
+            // ===== SET YOUR PASSWORD HERE =====
+            // Password is set to: finally1511
+            const correctPassword = 'finally';
+            
+            // Check if password is correct
+            if (enteredPassword === correctPassword) {
+                // ===== SUCCESS ACTIONS =====
+                const button = document.querySelector('.unlock-button');
+                
+                // Change button appearance for success
+                button.style.background = 'linear-gradient(135deg, #2ecc71, #27ae60)';
+                button.style.boxShadow = '0 20px 40px rgba(46, 204, 113, 0.5)';
+                button.textContent = 'Lets go! 🎉✨';
+                
+                // Add success animation
+                button.style.transform = 'scale(1.05)';
+                
+                // ===== REDIRECT =====
+                setTimeout(() => {
+                    // Replace with your actual surprise URL
+                    window.location.href = 'google.com'; 
+                    // will add the real link later
+                    
+                }, 2500); // Wait 2.5 seconds before redirecting
+                
+            } else {
+                
+                // Show error message
+                errorMessage.classList.add('show');
+                
+                // Change input border to red
+                passwordInput.style.borderColor = '#e74c3c';
+                passwordInput.style.boxShadow = '0 0 0 4px rgba(231, 76, 60, 0.15)';
+                
+                // Add shake animation to input
+                passwordInput.style.animation = 'shake 0.6s ease-in-out';
+                
+                // Reset everything after delay
+                setTimeout(() => {
+                    errorMessage.classList.remove('show');
+                    passwordInput.style.borderColor = '#e1e5e9';
+                    passwordInput.style.boxShadow = 'none';
+                    passwordInput.style.animation = '';
+                    passwordInput.value = ''; // Clear the input
+                }, 30000); // Wait few seconds before resetting
+            }
+        });
+
+        // ===== SHAKE ANIMATION FOR wrong pass =====
+        const shakeStyle = document.createElement('style');
+        shakeStyle.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                10%, 30%, 50%, 70%, 90% { transform: translateX(-8px); }
+                20%, 40%, 60%, 80% { transform: translateX(8px); }
+            }
+        `;
+        document.head.appendChild(shakeStyle);
+
+        // ===== AUTO-FOCUS ON PAGE LOAD =====
+        window.addEventListener('load', () => {
+            passwordInput.focus(); // Automatically focus the password field
+        });
+
+
+        passwordInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                loginForm.dispatchEvent(new Event('submit'));
+            }
+        });
+    </script>
+</body>
+</html>
