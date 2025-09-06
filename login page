@@ -94,7 +94,7 @@
                 // ===== REDIRECT =====
                 setTimeout(() => {
                     // Replace with your actual surprise URL
-                    window.location.href = 'google.com'; 
+                    window.location.href = 'coffee.html'; 
                     // will add the real link later
                     
                 }, 2500); // Wait 2.5 seconds before redirecting
